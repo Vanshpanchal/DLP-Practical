@@ -9,7 +9,7 @@ int check(char *reg)
     {
         return 0;
     }
-    
+
     // if (n == 2 && reg[n - 1] == 'b' && reg[n] == 'b')
     // {
     //     return 0;

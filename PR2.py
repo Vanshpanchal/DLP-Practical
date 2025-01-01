@@ -1,5 +1,7 @@
 class DFA:
-    def __init__(self, num_states, input_symbols, start_state, final_states, transition_function):
+    def __init__(
+        self, num_states, input_symbols, start_state, final_states, transition_function
+    ):
         self.num_states = num_states
         self.input_symbols = input_symbols
         self.start_state = start_state
@@ -36,24 +38,25 @@ def main():
     print("Enter transition function as: current_state input_symbol next_state")
     print("Type 'END' to stop entering transitions.")
     transition_function = {}
-
     while True:
         transition = input("Transition: ")
 
-        if transition.strip().upper() == 'END':
+        if transition.strip().upper() == "END":
             break
 
         current_state, input_symbol, next_state = transition.split()
         transition_function[(current_state, input_symbol)] = next_state
 
-    dfa = DFA(num_states, input_symbols, start_state, final_states, transition_function)
+    dfa = DFA(
+        num_states, input_symbols, start_state, final_states, transition_function
+    )
 
     print("\nDFA created successfully! Test it below:")
 
     while True:
         test_string = input("Enter a string to test (or type 'EXIT' to quit): ")
 
-        if test_string.strip().upper() == 'EXIT':
+        if test_string.strip().upper() == "EXIT":
             break
 
         if dfa.is_accepting(test_string):
