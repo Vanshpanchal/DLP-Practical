@@ -89,7 +89,7 @@ def lexical_analyzer(file_path):
 
 if __name__ == "__main__":
 
-    file_path = "./example.c"
+    file_path = "example.c"
     tokens, symbol_table = lexical_analyzer(file_path)
 
     for token, category in tokens:
