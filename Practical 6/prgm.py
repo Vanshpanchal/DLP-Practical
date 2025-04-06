@@ -1,6 +1,6 @@
 class RecursiveDescentParser:
     def __init__(self, input_text):
-        self.tokens = list(input_text)  
+        self.tokens = list(input_text)
         self.current_token_index = 0
 
     def peek(self):
@@ -15,37 +15,37 @@ class RecursiveDescentParser:
 
     def S(self):
         token = self.peek()
-        
-        if token == 'a':  
+
+        if token == "a":
             self.consume()
             return True
-        elif token == '(':  
-            self.consume()  
+        elif token == "(":
+            self.consume()
             if self.L():
-                if self.consume() == ')':  
+                if self.consume() == ")":
                     return True
                 else:
                     raise SyntaxError("Expected ')'")
             else:
                 raise SyntaxError("Invalid L inside '( )'")
         else:
-            return False  
+            return False
 
     def L(self):
-        """Handles the rule: L → S L’"""
+        """Handles the rule: L → S L'"""
         if self.S():
             return self.L_prime()
         return False
 
     def L_prime(self):
-        """Handles the rule: L’ → , S L’ | ϵ (empty)"""
-        if self.peek() == ',':  
-            self.consume()  
+        """Handles the rule: L' → , S L' | ϵ (empty)"""
+        if self.peek() == ",":
+            self.consume()
             if self.S():
-                return self.L_prime()  
+                return self.L_prime()
             else:
                 raise SyntaxError("Expected 'S' after ','")
-        return True 
+        return True
 
     def parse(self):
         """Starts parsing and ensures the entire input is consumed."""
@@ -57,15 +57,15 @@ class RecursiveDescentParser:
 
 if __name__ == "__main__":
     test_strings = [
-        "a",          # Valid (S → a)
-        "(a)",        # Valid (S → ( L ) where L → S)
-        "(a,a)",      # Valid (S → ( L ) where L → S, S)
-        "(a,a,a)",    # Valid (S → ( L ) where L → S, S, S)
-        "()",         # Invalid (Empty L)
-        "(a,)",       # Invalid (Comma without another S)
+        "a",  # Valid (S → a)
+        "(a)",  # Valid (S → ( L ) where L → S)
+        "(a,a)",  # Valid (S → ( L ) where L → S, S)
+        "(a,a,a)",  # Valid (S → ( L ) where L → S, S, S)
+        "()",  # Invalid (Empty L)
+        "(a,)",  # Invalid (Comma without another S)
         "(a,(a,a))",  # Valid (Nested expressions)
-        "(a,a,a",     # Invalid (Missing ')')
-        "a,a",        # Invalid (No outer parentheses)
+        "(a,a,a",  # Invalid (Missing ')')
+        "a,a",  # Invalid (No outer parentheses)
     ]
 
     for expr in test_strings:
