@@ -58,7 +58,7 @@ def main():
     #     ("E", "1"): "E",
     #     ("E", "0"): "E",
     # }
-    # test_strings = ["011", "1"]
+    # test_strings = ["0110", "1"]
 
     dfa = DFA(num_states, input_symbols, start_state, final_states, transition_function)
 
